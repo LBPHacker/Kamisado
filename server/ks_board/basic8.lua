@@ -49,6 +49,12 @@ function board_i:project_choices_by_sumo_push(tower, choices)
 		if highest_sumo_status < current_field.occupant.sumo_status then
 			highest_sumo_status = current_field.occupant.sumo_status
 		end
+		
+		if current_field.occupant.player == tower.player then
+			-- * we can't push our own pieces
+			towers_to_push = math.huge
+			break
+		end
 	end
 	
 	if towers_to_push <= tower.sumo_status and highest_sumo_status < tower.sumo_status then
