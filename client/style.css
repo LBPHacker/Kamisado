@@ -1,0 +1,230 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	color: #BBB;
+	background-color: #222;
+	background: url("bg.png");
+	width: 100%;
+	height: 100%;
+	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+#board_container {
+	width: 100vh;
+	height: 100vh;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-color: #999;
+	box-shadow: inset 0 0 2vh 0 #000;
+	border-radius: 1%;
+}
+
+@media screen and (min-width: 20cm) {
+	#board_container {
+		width: 90vh;
+		height: 90vh;
+	}
+}
+
+#board_border {
+	width: 100%;
+	height: 100%;
+}
+
+#board_border[data-endpoint-id="1"] {
+	transform: rotate(180deg);
+}
+
+.board {
+	width: 96%;
+	height: 96%;
+	position: relative;
+    left: 48%;
+    top: 48%;
+    transform: translateX(-48%) translateY(-48%);
+}
+
+.board .field {
+	position: absolute;
+}
+
+.board .field.choice_valid {
+	cursor: pointer;
+}
+
+.board .field_pattern {
+	pointer-events: none;
+	width: 90%;
+	height: 90%;
+	background: url("bg.png");
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.board .colour_selector[data-colour-id="C1"] .coloured {
+	background-color: #D77521;
+}
+
+.board .colour_selector[data-colour-id="C2"] .coloured {
+	background-color: #006BAC;
+}
+
+.board .colour_selector[data-colour-id="C3"] .coloured {
+	background-color: #6F3786;
+}
+
+.board .colour_selector[data-colour-id="C4"] .coloured {
+	background-color: #D2719E;
+}
+
+.board .colour_selector[data-colour-id="C5"] .coloured {
+	background-color: #E2C201;
+}
+
+.board .colour_selector[data-colour-id="C6"] .coloured {
+	background-color: #D23238;
+}
+
+.board .colour_selector[data-colour-id="C7"] .coloured {
+	background-color: #009157;
+}
+
+.board .colour_selector[data-colour-id="C8"] .coloured {
+	background-color: #774610;
+}
+
+.board .field_middle {
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0 0 5vh 0 rgba(0, 0, 0, 0.75);
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.board.choice_view .field.choice_invalid .field_middle {
+    opacity: 0.2;
+}
+
+.board .tower {
+	transition: 0.5s;
+	position: absolute;
+	pointer-events: none;
+}
+
+.board .tower[data-player="1"] {
+	transform: rotate(180deg);
+}
+
+.board .tower.hidden {
+	display: none;
+}
+
+.board .tower_middle {
+	width: 65%;
+	height: 65%;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 10%;
+    background-color: #000;
+	box-shadow: inset 0 0 1vh 0 rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+}
+
+.board .tower[data-player="1"] .tower_middle {
+    background-color: #EEE;
+	box-shadow: inset 0 0 1vh 0 rgba(0, 0, 0, 0.5);
+}
+
+.board.choice_view .tower.choice_invalid .tower_middle {
+    opacity: 0.8;
+}
+
+.board .tower_colour {
+	width: 50%;
+	height: 50%;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 10%;
+    transition: 0.5s;
+}
+
+.board.choice_view .tower.choice_invalid .tower_colour {
+    opacity: 0.8;
+}
+
+.board .tower_sumo {
+	display: none;
+	position: absolute;
+	width: 16%;
+	height: 16%;
+	border-radius: 50%;
+	top: 5%;
+	background-color: #EEE;
+}
+
+.board .tower[data-player="1"] .tower_sumo {
+	background-color: #000;
+}
+
+.board .tower[data-sumo-status="1"] .tower_sumo[data-sumo-level="1"] {
+	left: 42%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="2"] .tower_sumo[data-sumo-level="1"] {
+	left: 32%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="3"] .tower_sumo[data-sumo-level="1"] {
+	left: 22%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="4"] .tower_sumo[data-sumo-level="1"] {
+	left: 12%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="2"] .tower_sumo[data-sumo-level="2"] {
+	left: 52%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="3"] .tower_sumo[data-sumo-level="2"] {
+	left: 42%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="4"] .tower_sumo[data-sumo-level="2"] {
+	left: 32%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="3"] .tower_sumo[data-sumo-level="3"] {
+	left: 62%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="4"] .tower_sumo[data-sumo-level="3"] {
+	left: 52%;
+	display: initial;
+}
+
+.board .tower[data-sumo-status="4"] .tower_sumo[data-sumo-level="4"] {
+	left: 72%;
+	display: initial;
+}
+
