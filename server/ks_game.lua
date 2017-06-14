@@ -23,6 +23,7 @@ function game_i:endpoint_join(game_endpoint, session)
 		game_type = self.game_type,
 		endpoint_id = game_endpoint.endpoint_id,
 		board_size = self.board.size,
+		score_target = self.board.score_target,
 		board_fields = self.board.field_coll,
 		board_towers = self.board.tower_coll
 	})
@@ -142,7 +143,16 @@ end
 
 
 return {
-	new = function(protocol, game_type)
+	new = function(protocol, game_type_with_score_target)
+		local game_type, score_target = game_type_with_score_target:match("^(.+)%-([^%-]+)$")
+		if not game_type then
+			return
+		end
+		score_target = tonumber(score_target)
+		if not score_target then
+			return
+		end
+		
 		local board_ctor = game_types[game_type]
 		if not board_ctor then
 			return
@@ -150,7 +160,7 @@ return {
 		
 		local new_game = setmetatable({
 			endpoints = {},
-			board = board_ctor.new(),
+			board = board_ctor.new(score_target),
 			game_type = game_type,
 			protocol = protocol,
 			akmgr = protocol.akmgr,

@@ -8,10 +8,37 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<div id="board_container">
-			<div id="board_border">
+		<div id="container" class="container_table">
+			<div class="container_tbody">
+				<div class="container_tr">
+					<div id="board_container" class="container_td">
+						<div id="board_border">
+						</div>
+					</div>
+					<div id="msg_container" class="container_td">
+						<div id="msg">
+							<div id="msg_pattern">
+								<div id="msg_content">
+									<div id="msg_hax" class="hidden">
+										<p><span id="msg_player_role"></span>: <span class="msg_data" id="msg_player_id"></span></p>
+										<p>White score: <span class="msg_data msg_status" data-status-key="score1"></span></p>
+										<p>Black score: <span class="msg_data msg_status" data-status-key="score2"></span></p>
+										<p>Score target: <span class="msg_data msg_setup" data-setup-key="score_target"></span></p>
+										<p>Viewer count: <span class="msg_data msg_status" data-status-key="viewers"></span></p>
+										<p id="msg_key_0">White play key: <a class="msg_data">link</a></p>
+										<p id="msg_key_1">Black play key: <a class="msg_data">link</a></p>
+										<p id="msg_key_2">Global view key: <a class="msg_data">link</a></p>
+										<p id="msg_home"><a href="..">Kamisado</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
 </html>
+
+
 

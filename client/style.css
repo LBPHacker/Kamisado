@@ -1,32 +1,114 @@
 * {
 	padding: 0;
 	margin: 0;
+	border: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
 html, body {
 	color: #BBB;
 	background-color: #222;
 	background: url("bg.png");
+	font-family: verdana, helvetica, arial, sans-serif;
+	font-size: 2vh;
+	text-align: center;
 	width: 100%;
 	height: 100%;
-	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+#container {
+	max-width: 150vh;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.container_table {
+	width: 100%;
+	height: 100%;
+	display: table;
+}
+
+.container_tbody {
+	width: 100%;
+	height: 100%;
+	display: table-row-group;
+}
+
+.container_tr {
+	width: 100%;
+	height: 100%;
+	display: table-row;
+}
+
+.container_td {
+	display: table-cell;
 }
 
 #board_container {
 	width: 100vh;
 	height: 100vh;
+	background-color: #999;
+	box-shadow: inset 0 0 2vh 0 #000;
+	border-radius: 1vh;
+}
+
+#msg {
+	margin-left: 2vh;
+	height: 100%;
+	border-radius: 1vh;
+	background: rgba(255, 255, 255, 0.2);
+	box-shadow: inset 0 0 2vh 0 #000;
+}
+
+#msg_pattern {
+	width: calc(100% - 4vh);
+	height: calc(100% - 4vh);
 	position: relative;
 	left: 50%;
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
-	background-color: #999;
-	box-shadow: inset 0 0 2vh 0 #000;
-	border-radius: 1%;
 }
 
-@media screen and (min-width: 20cm) {
+#msg_content {
+	width: 100%;
+	height: 100%;
+}
+
+#msg_hax {
+	float: right;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+}
+
+#msg_hax p {
+	margin: 1em 1em 0 1em;
+	border-bottom: 1px solid #BBB;
+}
+
+#msg_hax p .msg_data {
+	float: right;
+	font-weight: bold;
+}
+
+@media screen and (min-height: 15cm) {
+	#container {
+		width: calc(100vw - 10vh);
+		height: 90%;
+	}
+	
 	#board_container {
 		width: 90vh;
+		height: 90vh;
+	}
+	
+	#msg_container {
 		height: 90vh;
 	}
 }
@@ -44,9 +126,9 @@ html, body {
 	width: 96%;
 	height: 96%;
 	position: relative;
-    left: 48%;
-    top: 48%;
-    transform: translateX(-48%) translateY(-48%);
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
 }
 
 .board .field {
@@ -105,12 +187,12 @@ html, body {
 	width: 100%;
 	height: 100%;
 	box-shadow: inset 0 0 5vh 0 rgba(0, 0, 0, 0.75);
-    opacity: 0.7;
-    transition: 0.5s;
+	opacity: 0.7;
+	transition: 0.5s;
 }
 
 .board.choice_view .field.choice_invalid .field_middle {
-    opacity: 0.2;
+	opacity: 0.2;
 }
 
 .board .tower {
@@ -123,7 +205,7 @@ html, body {
 	transform: rotate(180deg);
 }
 
-.board .tower.hidden {
+.hidden {
 	display: none;
 }
 
@@ -135,18 +217,18 @@ html, body {
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
 	border-radius: 10%;
-    background-color: #000;
+	background-color: #000;
 	box-shadow: inset 0 0 1vh 0 rgba(255, 255, 255, 0.5);
-    transition: 0.5s;
+	transition: 0.5s;
 }
 
 .board .tower[data-player="1"] .tower_middle {
-    background-color: #EEE;
+	background-color: #EEE;
 	box-shadow: inset 0 0 1vh 0 rgba(0, 0, 0, 0.5);
 }
 
 .board.choice_view .tower.choice_invalid .tower_middle {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 .board .tower_colour {
@@ -157,11 +239,11 @@ html, body {
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
 	border-radius: 10%;
-    transition: 0.5s;
+	transition: 0.5s;
 }
 
 .board.choice_view .tower.choice_invalid .tower_colour {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 .board .tower_sumo {
@@ -226,5 +308,75 @@ html, body {
 .board .tower[data-sumo-status="4"] .tower_sumo[data-sumo-level="4"] {
 	left: 72%;
 	display: initial;
+}
+
+h1 {
+	font-size: 3em;
+	font-weight: bold;
+	margin: 0 0 0.5em 0;
+}
+
+h2 {
+	margin: 1em 0 0 0;
+}
+
+p {
+	margin: 0.5em 0 0 0;
+}
+
+input {
+	margin-right: 1em;
+}
+
+.start_td {
+	text-align: left;
+	width: 50%;
+}
+
+#start_container {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 20em;
+}
+
+#start_container td {
+	width: 50%;
+}
+
+#start_container p {
+	font-weight: bold;
+}
+
+#start_container select {
+	width: 100%;
+	background: #BBB;
+	color: #444;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 0.2em;
+}
+
+#start {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 1vh;
+	background: rgba(255, 255, 255, 0.2);
+	box-shadow: inset 0 0 2vh 0 #000;
+	padding: 3vh;
+	width: 30em;
+}
+
+p#msg_home {
+	position: absolute;
+	bottom: 0;
+	margin: 0 0 0.5em 0;
+	width: 100%;
+	border-bottom: none;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
 }
 

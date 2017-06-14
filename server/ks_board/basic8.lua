@@ -221,8 +221,6 @@ end
 function board_i:init()
 	self.size = #self.colour_map
 	
-	self.score_target = 3
-	
 	self.players = {
 		[1] = {
 			name = "W",
@@ -312,7 +310,7 @@ function board_i:init()
 end
 
 return {
-	new = function()
+	new = function(score_target)
 		local new_board = setmetatable({
 			colour_map = {
 				{"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"},
@@ -323,7 +321,8 @@ return {
 				{"C2", "C5", "C8", "C3", "C6", "C1", "C4", "C7"},
 				{"C3", "C8", "C5", "C2", "C7", "C4", "C1", "C6"},
 				{"C8", "C7", "C6", "C5", "C4", "C3", "C2", "C1"}
-			}
+			},
+			score_target = score_target
 		}, board_m)
 		
 		new_board:init()

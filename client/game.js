@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			console.log(stuff);
 	};
 	
-	var create_board, destroy_board, mirror_status, send_message, clear_choices, mirror_choices;
+	var create_board, destroy_board, mirror_status, send_message, clear_choices, mirror_choices, mirror_keys;
 	
 	clear_choices = function() {
 		document.querySelectorAll(".board .field").forEach(function(field) {
@@ -32,6 +32,20 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.querySelectorAll(".board .tower").forEach(function(tower) {
 			tower.classList.add(message_obj.choices[tower.dataset.fieldName] ? "choice_valid" : "choice_invalid");
 		});
+	};
+	
+	mirror_keys = function(message_obj) {
+		debug(message_obj);
+		for (var ix = 0; ix != 3; ++ix) {
+			var $key_p = document.querySelector("#msg_key_" + ix);
+			var key_str = message_obj["key" + (ix + 1)];
+			$key_p.children[0].href = CLIENT_DIR + ["/play/", "/play/", "/view/"][ix] + key_str;
+			
+			if (key_str == ".")
+				$key_p.classList.add("hidden");
+			else
+				$key_p.classList.remove("hidden");
+		}
 	};
 	
 	create_board = function(message_obj) {
@@ -104,10 +118,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		var $board_border = document.querySelector("#board_border");
 		$board_border.dataset.endpointId = setup.endpoint_id;
 		$board_border.appendChild(board_div);
+		
+		document.querySelectorAll("#msg_content .msg_setup").forEach(function(span) {
+			span.innerText = setup[span.dataset.setupKey];
+		});
+		
+		document.querySelector("#msg_hax").classList.remove("hidden");
 	};
 	
 	destroy_board = function() {
 		document.querySelector(".board").remove();
+		
+		document.querySelector("#msg_hax").classList.add("hidden");
 	};
 	
 	mirror_status = function(message_obj) {
@@ -123,6 +145,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			$tower.dataset.sumoStatus = tower_obj.sumo_status;
 			$tower.classList.remove("hidden");
 		});
+		
+		document.querySelectorAll("#msg_content .msg_status").forEach(function(span) {
+			span.innerText = status[span.dataset.statusKey];
+		});
+		
+		document.querySelector("#msg_player_role").innerText = status.winner ? "Winner" : "Turn";
+		document.querySelector("#msg_player_id").innerText = ["White", "Black"][(status.winner || status.player_turn) - 1];
 	};
 	
 	(function() {
@@ -182,8 +211,11 @@ document.addEventListener("DOMContentLoaded", function() {
 					mirror_choices(message_obj);
 					break;
 					
+				case "keys":
+					mirror_keys(message_obj);
+					break
+					
 				case "status":
-					//debug(message_obj);
 					mirror_status(message_obj);
 					break;
 					
