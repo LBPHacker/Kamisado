@@ -174,6 +174,9 @@ function protocol_i:session_message(session, message)
 	local ok, message_obj = pcall(json.decode.decode, message, json.decode.strict)
 	if not ok then
 		-- * DEBUG
+		self:session_send(session, {
+			action = "invalidjson"
+		})
 		printf("[PROTO] session %s sent invalid json: %s", tostring(self), message)
 		return
 	end

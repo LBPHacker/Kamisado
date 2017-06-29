@@ -8,38 +8,40 @@ document.addEventListener("DOMContentLoaded", function() {
 	const RECONNECT_TIMER_TIMEOUT = 1000;
 	const RECONNECT_TIMER_LOOPS = 10;
 	
-	const DEBUG = 1;
-	var debug = function(stuff) {
-		if (DEBUG)
-			console.log(stuff);
-	};
-	
 	var create_board, destroy_board, mirror_status, send_message, clear_choices, mirror_choices, mirror_keys;
 	
+	var foreach_pls = function(nodelist, callback) {
+		for (var ix = 0; ix != nodelist.length; ++ix)
+			callback(nodelist[ix]);
+	};
+	
 	clear_choices = function() {
-		document.querySelectorAll(".board .field").forEach(function(field) {
+		//document.querySelectorAll(".board .field").forEach(function(field) {
+		foreach_pls(document.querySelectorAll(".board .field"), function(field) {
 			field.classList.remove("choice_invalid", "choice_valid");
 		});
-		document.querySelectorAll(".board .tower").forEach(function(tower) {
+		//document.querySelectorAll(".board .tower").forEach(function(tower) {
+		foreach_pls(document.querySelectorAll(".board .tower"), function(tower) {
 			tower.classList.remove("choice_invalid", "choice_valid");
 		});
 	};
 	
 	mirror_choices = function(message_obj) {
-		document.querySelectorAll(".board .field").forEach(function(field) {
+		//document.querySelectorAll(".board .field").forEach(function(field) {
+		foreach_pls(document.querySelectorAll(".board .field"), function(field) {
 			field.classList.add(message_obj.choices[field.dataset.fieldName] ? "choice_valid" : "choice_invalid");
 		});
-		document.querySelectorAll(".board .tower").forEach(function(tower) {
+		//document.querySelectorAll(".board .tower").forEach(function(tower) {
+		foreach_pls(document.querySelectorAll(".board .tower"), function(tower) {
 			tower.classList.add(message_obj.choices[tower.dataset.fieldName] ? "choice_valid" : "choice_invalid");
 		});
 	};
 	
 	mirror_keys = function(message_obj) {
-		debug(message_obj);
 		for (var ix = 0; ix != 3; ++ix) {
 			var $key_p = document.querySelector("#msg_key_" + ix);
 			var key_str = message_obj["key" + (ix + 1)];
-			$key_p.children[0].href = CLIENT_DIR + ["/play/", "/play/", "/view/"][ix] + key_str;
+			$key_p.children[0].children[0].href = CLIENT_DIR + ["/play/", "/play/", "/view/"][ix] + key_str;
 			
 			if (key_str == ".")
 				$key_p.classList.add("hidden");
@@ -119,7 +121,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		$board_border.dataset.endpointId = setup.endpoint_id;
 		$board_border.appendChild(board_div);
 		
-		document.querySelectorAll("#msg_content .msg_setup").forEach(function(span) {
+		//document.querySelectorAll("#msg_content .msg_setup").forEach(function(span) {
+		foreach_pls(document.querySelectorAll("#msg_content .msg_setup"), function(span) {
 			span.innerText = setup[span.dataset.setupKey];
 		});
 		
@@ -146,13 +149,39 @@ document.addEventListener("DOMContentLoaded", function() {
 			$tower.classList.remove("hidden");
 		});
 		
-		document.querySelectorAll("#msg_content .msg_status").forEach(function(span) {
+		//document.querySelectorAll("#msg_content .msg_status").forEach(function(span) {
+		foreach_pls(document.querySelectorAll("#msg_content .msg_status"), function(span) {
 			span.innerText = status[span.dataset.statusKey];
 		});
 		
 		document.querySelector("#msg_player_role").innerText = status.winner ? "Winner" : "Turn";
 		document.querySelector("#msg_player_id").innerText = ["White", "Black"][(status.winner || status.player_turn) - 1];
 	};
+	
+	var qr_instance = new QRCode("qr_container", {
+		width: 1024,
+		height: 1024,
+		colorDark: "#BBB",
+		colorLight: "#222",
+		correctLevel: QRCode.CorrectLevel.H
+	});
+	
+	//document.querySelectorAll("#msg_content .msg_qr").forEach(function(span) {
+	foreach_pls(document.querySelectorAll("#msg_content .msg_qr"), function(span) {
+		span.addEventListener("click", function(event) {
+			qr_instance.clear();
+			qr_instance.makeCode(event.target.parentNode.children[0].href);
+			document.body.classList.add("show_qr");
+			history.replaceState({kamisado_history_state: "default"}, document.title, window.location.href);
+			history.pushState({}, "QR code", window.location.href);
+		});
+	});
+	
+	window.addEventListener("popstate", function(event) {
+		if (event.state && event.state.kamisado_history_state == "default") {
+			document.body.classList.remove("show_qr");
+		}
+	});
 	
 	(function() {
 		var socket;
@@ -217,11 +246,6 @@ document.addEventListener("DOMContentLoaded", function() {
 					
 				case "status":
 					mirror_status(message_obj);
-					break;
-					
-				default:
-					debug("unknown action " + message_obj.action);
-					debug(message_obj);
 					break;
 				}
 			}

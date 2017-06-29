@@ -380,3 +380,54 @@ p#msg_home {
 	font-weight: bold;
 }
 
+#msg_hax .msg_qr {
+	cursor: pointer;
+}
+
+#qr_overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: none;
+	background: #222;
+	z-index: 1;
+}
+
+#qr_middle {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+body.show_qr #qr_overlay {
+	display: initial;
+}
+
+#qr_container {
+	width: 80vh;
+	height: 80vh;
+	z-index: 1;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#qr_close {
+	cursor: pointer;
+}
+
+/*
+#qr_overlay p {
+	font-size: 3em;
+	font-weight: bold;
+}
+*/
+
+#qr_overlay img {
+	width: 100%;
+	height: 100%;
+}
+

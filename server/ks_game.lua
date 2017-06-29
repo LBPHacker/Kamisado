@@ -142,13 +142,19 @@ for key, value in next, {"basic8"} do
 end
 
 
+local SCORE_TARGETS = {
+	["single"] = 1,
+	["standard"] = 3,
+	["long"] = 7,
+	["marathon"] = 15
+}
 return {
 	new = function(protocol, game_type_with_score_target)
-		local game_type, score_target = game_type_with_score_target:match("^(.+)%-([^%-]+)$")
+		local game_type, score_target_str = game_type_with_score_target:match("^(.+)%-([^%-]+)$")
 		if not game_type then
 			return
 		end
-		score_target = tonumber(score_target)
+		local score_target = SCORE_TARGETS[score_target_str]
 		if not score_target then
 			return
 		end
