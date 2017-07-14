@@ -1,0 +1,10 @@
+.*
+!/.gitignore
+!/.gitattributes
+*~
+*.log
+*.geany
+*.nppsession
+*.nppworkspace
+ignore/
+
