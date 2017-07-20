@@ -6,5 +6,8 @@
 *.geany
 *.nppsession
 *.nppworkspace
+server/*.pid
+server/*.conf
+*.sublime-*
 ignore/
 

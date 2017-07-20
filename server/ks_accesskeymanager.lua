@@ -7,15 +7,13 @@ for pos, letter in alphabet_str:gmatch("()(.)") do
 	alphabet[pos - 1] = letter
 end
 function accesskeymanager_i:generate()
-	local random_handle = io.open("/dev/urandom", "rb")
 	local keys = {}
 	for ix = 1, 3 do
 		local key_str
 		while true do
 			local key_tbl = {}
 			for nx = 1, 4 do
-				local random_stuff = random_handle:read(3)
-				local random_value = random_stuff:byte(1) + random_stuff:byte(2) * 0x100 + random_stuff:byte(3) * 0x10000
+				local random_value = math.random(0x000000, 0xFFFFFF)
 				for bx = 1, 4 do
 					table.insert(key_tbl, alphabet[bit.band(random_value, 0x3F)])
 					random_value = bit.rshift(random_value, 6)
@@ -30,9 +28,9 @@ function accesskeymanager_i:generate()
 		--printf("[AKMGR] reserve %s", key_str)
 		keys[ix] = key_str
 	end
-	random_handle:close()
 	return keys
 end
+math.randomseed(os.time())
 
 function accesskeymanager_i:free(keys)
 	for key, value in next, keys do
