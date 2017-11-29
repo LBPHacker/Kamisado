@@ -101,7 +101,7 @@ function game_i:manage_cleanup_timer()
 end
 
 function game_i:cleanup_callback()
-	printf("[GAME] cleanup %s", tostring(self))
+	--printf("[GAME] cleanup %s", tostring(self))
 	self.cleanup_timer:cancel()
 	self.akmgr:free(self.keys)
 end
@@ -207,7 +207,7 @@ return {
 		
 		new_game:manage_cleanup_timer()
 		
-		printf("[GAME] create %s", tostring(new_game))
+		--printf("[GAME] create %s", tostring(new_game))
 		return new_game
 	end
 }

@@ -92,9 +92,9 @@ function protocol_i.action_handlers:new(session, message_obj)
 		key3 = new_game.keys[3]
 	})
 	
-	for ix = 1, 3 do
-		printf("[PROTO] Player %i: https://hikari.lbphacker.hu/kamisado/play/%s", ix, new_game.keys[ix])
-	end
+	--for ix = 1, 3 do
+		--printf("[PROTO] Player %i: https://hikari.lbphacker.hu/kamisado/play/%s", ix, new_game.keys[ix])
+	--end
 end
 
 function protocol_i.action_handlers:join(session, message_obj)

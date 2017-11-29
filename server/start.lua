@@ -1,6 +1,7 @@
 #! /usr/bin/env lua
 
 local SERVICE_NAME = "kamisadoserver"
+--local SERVICE_COMMAND = "./wrapper.lua unix:/home/kamisadoserver/Kamisado/server/kamisado.socket"
 local SERVICE_COMMAND = "./wrapper.lua 55559"
 local USER = "$(whoami)"
 local CONF = "start.conf"
