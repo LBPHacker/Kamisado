@@ -1,13 +1,17 @@
-location ~ /kamisado/play/[A-Za-z0-9\-_]+$ {
-	try_files '' /kamisado/game.html;
-}
+location /kamisado {
+	alias /home/kamisadoserver/Kamisado/client;
 
-location ~ /kamisado/view/[A-Za-z0-9\-_]+$ {
-	try_files '' /kamisado/game.html;
-}
+	location ~ /kamisado/play/[A-Za-z0-9\-_]+$ {
+		try_files '' /kamisado/game.html;
+	}
 
-location ~ /kamisado/new/[A-Za-z0-9\-_]+$ {
-	try_files '' /kamisado/game.html;
+	location ~ /kamisado/view/[A-Za-z0-9\-_]+$ {
+		try_files '' /kamisado/game.html;
+	}
+
+	location ~ /kamisado/new/[A-Za-z0-9\-_]+$ {
+		try_files '' /kamisado/game.html;
+	}
 }
 
 location /kamisadoserver {

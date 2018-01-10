@@ -106,8 +106,8 @@ function board_i:tower_to_field(tower, field)
 end
 
 function board_i:match()
-	-- * black starts
-	self.player_turn = 2
+	-- * white starts
+	self.player_turn = 1
 	
 	-- * round loop
 	while true do
