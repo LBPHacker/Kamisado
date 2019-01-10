@@ -16,22 +16,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	};
 	
 	clear_choices = function() {
-		//document.querySelectorAll(".board .field").forEach(function(field) {
 		foreach_pls(document.querySelectorAll(".board .field"), function(field) {
 			field.classList.remove("choice_invalid", "choice_valid");
 		});
-		//document.querySelectorAll(".board .tower").forEach(function(tower) {
 		foreach_pls(document.querySelectorAll(".board .tower"), function(tower) {
 			tower.classList.remove("choice_invalid", "choice_valid");
 		});
 	};
 	
 	mirror_choices = function(message_obj) {
-		//document.querySelectorAll(".board .field").forEach(function(field) {
 		foreach_pls(document.querySelectorAll(".board .field"), function(field) {
 			field.classList.add(message_obj.choices[field.dataset.fieldName] ? "choice_valid" : "choice_invalid");
 		});
-		//document.querySelectorAll(".board .tower").forEach(function(tower) {
 		foreach_pls(document.querySelectorAll(".board .tower"), function(tower) {
 			tower.classList.add(message_obj.choices[tower.dataset.fieldName] ? "choice_valid" : "choice_invalid");
 		});
@@ -121,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		$board_border.dataset.endpointId = setup.endpoint_id;
 		$board_border.appendChild(board_div);
 		
-		//document.querySelectorAll("#msg_content .msg_setup").forEach(function(span) {
 		foreach_pls(document.querySelectorAll("#msg_content .msg_setup"), function(span) {
 			span.innerText = setup[span.dataset.setupKey];
 		});
@@ -149,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			$tower.classList.remove("hidden");
 		});
 		
-		//document.querySelectorAll("#msg_content .msg_status").forEach(function(span) {
 		foreach_pls(document.querySelectorAll("#msg_content .msg_status"), function(span) {
 			span.innerText = status[span.dataset.statusKey];
 		});
@@ -166,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		correctLevel: QRCode.CorrectLevel.H
 	});
 	
-	//document.querySelectorAll("#msg_content .msg_qr").forEach(function(span) {
 	foreach_pls(document.querySelectorAll("#msg_content .msg_qr"), function(span) {
 		span.addEventListener("click", function(event) {
 			qr_instance.clear();

@@ -1,8 +1,6 @@
 #! /usr/bin/env luajit
 
 local args = {...}
-local port_unix = args[1]:match("^unix:(.+)$")
-local port_numeric = (not port_unix) and tonumber(args[1]) or nil
 
 local ev = require("ev")
 local websocket = require("websocket")
@@ -27,29 +25,8 @@ local function call_show_errors(func)
 	end
 end
 
-if port_unix then
-	os.remove(port_unix)
-end
 local server = websocket.server.ev.listen({
-	-- don't mind this, this will only work on my server
-	-- yes I rigged luawebsocket
-	socketfactory = port_unix and function()
-		local socket_unix = require("socket.unix")
-		local socket, err = socket_unix()
-		if not socket then
-			return nil, err
-		end
-		local ok, err = socket:bind(port_unix)
-		if not ok then
-			return nil, err
-		end
-		local ok, err = socket:listen(32)
-		if not ok then
-			return nil, err
-		end
-		return socket
-	end,
-	port = port_numeric,
+	port = 55559,
 	protocols = {
 		kamisado = function(ws)
 			call_show_errors(function()
