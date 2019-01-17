@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 	const CLIENT_DIR = "/kamisado";
-	const SERVER_URL = "wss://www.lbphacker.pw/kamisadoserver";
+	const SERVER_URL = "wss://www.lbphacker.pw/kamisado/ws";
 	const PING_TIMER_TIMEOUT = 60000;
 	const KILL_TIMER_TIMEOUT = 90000;
 	const RECONNECT_TIMER_TIMEOUT = 1000;

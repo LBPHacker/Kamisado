@@ -14,7 +14,7 @@ location /kamisado {
 	}
 }
 
-location /kamisadoserver {
+location /kamisado/ws {
 	proxy_pass http://localhost:55559;
 	#proxy_pass http://unix:/home/kamisadoserver/Kamisado/server/kamisado.socket;
 	proxy_http_version 1.1;
