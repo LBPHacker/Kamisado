@@ -33,7 +33,7 @@ end
 math.randomseed(os.time())
 
 function accesskeymanager_i:free(keys)
-	for key, value in next, keys do
+	for key, value in pairs(keys) do
 		self.keys_in_use[value] = nil
 		--printf("[AKMGR] free %s", value)
 	end

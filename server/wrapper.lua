@@ -4,7 +4,7 @@ local args = {...}
 
 function print(...)
 	local safe_tbl = {}
-	for key, value in next, {...} do
+	for key, value in pairs({...}) do
 		safe_tbl[key] = tostring(value)
 	end
 	io.stderr:write(table.concat(safe_tbl, "\t") .. "\n")

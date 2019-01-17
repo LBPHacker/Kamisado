@@ -181,7 +181,7 @@ function board_i:match()
 		
 		-- * initiate fills for next round
 		self.choices_assoc = {}
-		for field_name, field in next, self.fields do
+		for field_name, field in pairs(self.fields) do
 			if field.home_of == self.player_turn and field.fill_role then
 				self.choices_assoc[field.name] = true
 			end
@@ -270,7 +270,7 @@ function board_i:init()
 	
 	self.towers = {}
 	self.tower_coll = {}
-	for iy, player in next, {[1] = self.players[1], [self.size] = self.players[2]} do
+	for iy, player in pairs({[1] = self.players[1], [self.size] = self.players[2]}) do
 		for ix = 1, self.size do
 			local new_tower = {
 				name = player.name .. ix,
@@ -310,18 +310,9 @@ function board_i:init()
 end
 
 return {
-	new = function(score_target)
+	new = function(score_target, colour_map)
 		local new_board = setmetatable({
-			colour_map = {
-				{"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"},
-				{"C6", "C1", "C4", "C7", "C2", "C5", "C8", "C3"},
-				{"C7", "C4", "C1", "C6", "C3", "C8", "C5", "C2"},
-				{"C4", "C3", "C2", "C1", "C8", "C7", "C6", "C5"},
-				{"C5", "C6", "C7", "C8", "C1", "C2", "C3", "C4"},
-				{"C2", "C5", "C8", "C3", "C6", "C1", "C4", "C7"},
-				{"C3", "C8", "C5", "C2", "C7", "C4", "C1", "C6"},
-				{"C8", "C7", "C6", "C5", "C4", "C3", "C2", "C1"}
-			},
+			colour_map = colour_map,
 			score_target = score_target
 		}, board_m)
 		

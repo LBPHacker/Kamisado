@@ -116,7 +116,7 @@ function game_i:update_status_cache()
 		viewers = self.viewers
 	}
 	
-	for tower_name, tower in next, self.board.towers do
+	for tower_name, tower in pairs(self.board.towers) do
 		self.status_cache.towers[tower_name] = {
 			sumo_status = tower.sumo_status,
 			field = tower.field.name
@@ -131,13 +131,13 @@ function game_i:to_all_sessions(protocol_func, ...)
 	if self.endpoints[2].session then
 		protocol_func(self.protocol, self.endpoints[2].session, ...)
 	end
-	for session in next, self.endpoints[3].session_set do
+	for session in pairs(self.endpoints[3].session_set) do
 		protocol_func(self.protocol, session, ...)
 	end
 end
 
 local game_types = {}
-for key, value in next, {"basic8"} do
+for key, value in pairs({"basic_8", "basic_10"}) do
 	game_types[value] = require("ks_board." .. value)
 end
 
@@ -201,7 +201,7 @@ return {
 		
 		new_game:update_status_cache()
 		
-		for endpoint_id, endpoint in next, new_game.endpoints do
+		for endpoint_id, endpoint in pairs(new_game.endpoints) do
 			new_game.akmgr:set(endpoint.access_key, endpoint)
 		end
 		

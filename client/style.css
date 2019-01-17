@@ -182,6 +182,14 @@ html, body {
 	background-color: #774610;
 }
 
+.board .colour_selector[data-colour-id="C9"] .coloured {
+	background-color: #90886B;
+}
+
+.board .colour_selector[data-colour-id="C10"] .coloured {
+	background-color: #A2B5C1;
+}
+
 .board .field_middle {
 	pointer-events: none;
 	width: 100%;
