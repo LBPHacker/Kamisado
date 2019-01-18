@@ -223,14 +223,14 @@ function board_i:init()
 	
 	self.players = {
 		[1] = {
-			name = "W",
+			name = "We",
 			me = 1,
 			other = 2,
 			towers = {},
 			score = 0
 		},
 		[2] = {
-			name = "B",
+			name = "Bk",
 			me = 2,
 			other = 1,
 			towers = {},
@@ -242,14 +242,12 @@ function board_i:init()
 	self.fields = {}
 	self.field_map = {}
 	self.field_coll = {}
-	local field_counter = 0
 	for iy = 1, self.size do
 		self.field_map[iy] = {}
 		for ix = 1, self.size do
-			field_counter = field_counter + 1
 			local new_field = {
 				colour = self.colour_map[iy][ix],
-				name = "F" .. field_counter,
+				name = ("Fl-%02i-%02i"):format(ix, iy),
 				px = ix,
 				py = iy,
 				fill_role = false,
@@ -273,7 +271,7 @@ function board_i:init()
 	for iy, player in pairs({[1] = self.players[1], [self.size] = self.players[2]}) do
 		for ix = 1, self.size do
 			local new_tower = {
-				name = player.name .. ix,
+				name = ("To-%s-%s"):format(player.name, self.field_map[iy][ix].colour),
 				field = self.field_map[iy][ix],
 				colour = self.field_map[iy][ix].colour,
 				player = player,

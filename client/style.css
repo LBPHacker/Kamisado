@@ -150,43 +150,43 @@ html, body {
 	transform: translateX(-50%) translateY(-50%);
 }
 
-.board .colour_selector[data-colour-id="C1"] .coloured {
+.board .colour_selector[data-colour-id="Or"] .coloured {
 	background-color: #D77521;
 }
 
-.board .colour_selector[data-colour-id="C2"] .coloured {
+.board .colour_selector[data-colour-id="Bl"] .coloured {
 	background-color: #006BAC;
 }
 
-.board .colour_selector[data-colour-id="C3"] .coloured {
+.board .colour_selector[data-colour-id="Pu"] .coloured {
 	background-color: #6F3786;
 }
 
-.board .colour_selector[data-colour-id="C4"] .coloured {
+.board .colour_selector[data-colour-id="Pi"] .coloured {
 	background-color: #D2719E;
 }
 
-.board .colour_selector[data-colour-id="C5"] .coloured {
+.board .colour_selector[data-colour-id="Ye"] .coloured {
 	background-color: #E2C201;
 }
 
-.board .colour_selector[data-colour-id="C6"] .coloured {
+.board .colour_selector[data-colour-id="Re"] .coloured {
 	background-color: #D23238;
 }
 
-.board .colour_selector[data-colour-id="C7"] .coloured {
+.board .colour_selector[data-colour-id="Gr"] .coloured {
 	background-color: #009157;
 }
 
-.board .colour_selector[data-colour-id="C8"] .coloured {
+.board .colour_selector[data-colour-id="Br"] .coloured {
 	background-color: #774610;
 }
 
-.board .colour_selector[data-colour-id="C9"] .coloured {
+.board .colour_selector[data-colour-id="Go"] .coloured {
 	background-color: #90886B;
 }
 
-.board .colour_selector[data-colour-id="C10"] .coloured {
+.board .colour_selector[data-colour-id="Si"] .coloured {
 	background-color: #A2B5C1;
 }
 
