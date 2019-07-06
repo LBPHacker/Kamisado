@@ -137,7 +137,7 @@ function game_i:to_all_sessions(protocol_func, ...)
 end
 
 local game_types = {}
-for key, value in pairs({"basic_8", "basic_10"}) do
+for key, value in pairs({"basic_6", "basic_8", "basic_10"}) do
 	game_types[value] = require("ks_board." .. value)
 end
 

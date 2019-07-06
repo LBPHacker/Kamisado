@@ -328,6 +328,10 @@ h2 {
 	margin: 1em 0 0 0;
 }
 
+h3 {
+	margin: 1em 0 0 0;
+}
+
 p {
 	margin: 0.5em 0 0 0;
 }
@@ -437,5 +441,31 @@ body.show_qr #qr_overlay {
 #qr_overlay img {
 	width: 100%;
 	height: 100%;
+}
+
+@media screen and (orientation: portrait) {
+	#board_container {
+		width: 90vw;
+		height: 90vw;
+		margin-top: 10vw;
+	}
+
+	#board_container.container_td {
+		display: block;
+	}
+
+	#msg_container {
+		height: 90vw;
+	}
+
+	#msg_container.container_td {
+		display: block;
+	}
+
+	#msg {
+		font-size: 1.5vh;
+		margin-top: 2vh;
+		margin-left: 0;
+	}
 }
 

@@ -1,8 +1,8 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function() {
-	const CLIENT_DIR = "/kamisado";
-	const SERVER_URL = "wss://www.lbphacker.pw/kamisado/ws";
+	const CLIENT_DIR = "";
+	const SERVER_URL = "wss://" + location.host + "/ws";
 	const PING_TIMER_TIMEOUT = 60000;
 	const KILL_TIMER_TIMEOUT = 90000;
 	const RECONNECT_TIMER_TIMEOUT = 1000;
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			ping_interval = setInterval(send_ping, PING_TIMER_TIMEOUT);
 			kill_timeout = setTimeout(stage_reconnect, KILL_TIMER_TIMEOUT);
 			
-			var page_params = ((window.location.href.match(new RegExp(CLIENT_DIR + "/(.*)")) || [])[1] || "").split("/").filter(str => str.length != 0);
+			var page_params = ((window.location.href.match(new RegExp("://[^/]+/(.*)")) || [])[1] || "").split("/").filter(str => str.length != 0);
 		
 			switch (page_params[0]) {
 			case "play":
